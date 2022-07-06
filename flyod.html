@@ -1,0 +1,52 @@
+<script>
+		
+		class Node
+		{
+			constructor(d)
+			{
+				this.data = d;
+				this.next = null;
+			}
+		}
+
+		let head = null;
+
+	
+		function detectLoop(head) {
+			let slowPointer = head;
+			let fastPointer = head;
+
+			while (slowPointer != null
+				&& fastPointer != null
+				&& fastPointer.next != null) {
+				slowPointer = slowPointer.next;
+				fastPointer = fastPointer.next.next;
+				if (slowPointer == fastPointer)
+					return 1;
+			}
+
+			return 0;
+		}
+
+	
+		head = new Node(11);
+		head.next = new Node(12);
+		head.next.next = new Node(13);
+		head.next.next.next = new Node(14);
+		head.next.next.next.next = new Node(15);
+
+		
+		let temp = head;
+		while (temp.next != null)
+			temp = temp.next;
+
+		temp.next = head;
+
+
+		if (detectLoop(head))
+			document.write("Loop exists in the Linked List" + "<br>");
+		else
+			document.write("Loop does not exists in the Linked List" + "<br>");
+
+	
+	</script>
